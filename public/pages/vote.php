@@ -50,6 +50,16 @@
               </div>
               <div class="check"><i class="fas fa-check"></i></div>
             </div>
+
+            <div class="candidate-card" id="pres_2" onclick="selectCandidate('pres_2', 'Velly Ibanez', 'president')">
+              <img class="avatar" src="../../img/candidatesImg/velly.jpg" onerror="this.src='../../img/logo/PTCI-logo.png'" alt="Candidate">
+              <div class="info">
+                <div class="name">Velly Ibanez</div>
+                <div class="dept">BSOA - 3rd Year</div>
+                <div class="desc">A dedicated leader with strong communication skills and passion for student empowerment.</div>
+              </div>
+              <div class="check"><i class="fas fa-check"></i></div>
+            </div>
           </div>
 
           <!-- Vice President Section -->
@@ -62,6 +72,26 @@
                 <div class="name">Lennith Castro</div>
                 <div class="dept">BSIT - 3rd Year</div>
                 <div class="desc">An enthusiastic advocate for student welfare and progress.</div>
+              </div>
+              <div class="check"><i class="fas fa-check"></i></div>
+            </div>
+
+            <div class="candidate-card" id="vpres_2" onclick="selectCandidate('vpres_2', 'Lovelie Reyes', 'vice')">
+              <img class="avatar" src="../../img/candidatesImg/lovelie.jpeg" onerror="this.src='../../img/logo/PTCI-logo.png'" alt="Candidate">
+              <div class="info">
+                <div class="name">Di ko kilala yan</div>
+                <div class="dept">BSHM - 3rd Year</div>
+                <div class="desc">An enthusiastic advocate for student welfare and progress.</div>
+              </div>
+              <div class="check"><i class="fas fa-check"></i></div>
+            </div>
+
+            <div class="candidate-card" id="vpres_3" onclick="selectCandidate('vpres_3', 'Jamie Lopez', 'vice')">
+              <img class="avatar" src="../../img/candidatesImg/jamie.jpeg" onerror="this.src='../../img/logo/PTCI-logo.png'" alt="Candidate">
+              <div class="info">
+                <div class="name">Di ko kilala yan</div>
+                <div class="dept">BSOA - 4th Year</div>
+                <div class="desc">A proactive leader focused on unity and student development.</div>
               </div>
               <div class="check"><i class="fas fa-check"></i></div>
             </div>
@@ -97,19 +127,15 @@
 
       function selectCandidate(id, name, type) {
         if (type === 'president') {
-          // Deselect all president cards
           document.querySelectorAll('[id^="pres_"]').forEach(card => card.classList.remove('selected'));
           selectedPresident = name;
         } else {
-          // Deselect all vice president cards
           document.querySelectorAll('[id^="vpres_"]').forEach(card => card.classList.remove('selected'));
           selectedVicePresident = name;
         }
 
-        // Select clicked card
         document.getElementById(id).classList.add('selected');
 
-        // Update summary
         if (type === 'president') {
           const el = document.getElementById('sel_pres');
           el.textContent = name;
@@ -120,7 +146,6 @@
           el.classList.remove('empty');
         }
 
-        // Update button state
         updateSubmitButton();
       }
 
@@ -140,7 +165,6 @@
         
         alert('Vote submitted successfully!\n\nPresident: ' + selectedPresident + '\nVice President: ' + selectedVicePresident);
         
-        // Reset (demo only)
         selectedPresident = null;
         selectedVicePresident = null;
         document.querySelectorAll('.candidate-card').forEach(c => c.classList.remove('selected'));
@@ -153,4 +177,3 @@
     </script>
   </body>
 </html>
-
