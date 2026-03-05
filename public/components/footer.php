@@ -41,7 +41,7 @@
       <p>Copyright © 2025 Palawan Technological College Inc. All rights reserved.</p>
       <div class="powered-by">
         <span>Powered by</span>
-        <img src="../../assets/img/461514192_122108110472537146_3222580666165080691_n-removebg-preview.png" alt="Powered by" />
+        <img src="../../assets/img/ic2-namberwan.png" alt="Powered by" />
       </div>
     </div>
   </div>
