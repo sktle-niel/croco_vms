@@ -1,3 +1,14 @@
+<?php
+require_once __DIR__ . '/../backend/include.php';
+require_once __DIR__ . '/components/invalidMessage.php';
+require_once __DIR__ . '/components/successMessage.php';
+
+// Check if user is already logged in
+if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
+    header('Location: ../public/pages/vote.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +31,12 @@
     <!-- Floating Logos Background -->
     <div class="form-floating-logos" id="formFloatingLogos"></div>
 
+    <!-- Login Invalid Message Overlay -->
+    <?php renderLoginInvalidOverlay(); ?>
+
+    <!-- Login Success Message Overlay -->
+    <?php renderLoginSuccessOverlay(); ?>
+
     <div class="form-container">
         <div class="form-card">
             <!-- Logo Section -->
@@ -33,16 +50,8 @@
                 <p>Log in to cast your vote</p>
             </div>
 
-            <!-- Alert -->
-            <?php if (isset($_GET['error'])): ?>
-                <div class="form-alert show">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <?php echo htmlspecialchars($_GET['error']); ?>
-                </div>
-            <?php endif; ?>
-
             <!-- Login Form -->
-            <form action="../backend/validation/login_process.php" method="POST">
+            <form action="../backend/validation/loginProcess.php" method="POST">
                 <div class="form-group">
                     <label for="SchoolID">Student ID / LRN</label>
                     <input type="text" name="SchoolID" class="form-control" id="SchoolID" placeholder="Enter Student ID or LRN" required />
@@ -120,6 +129,26 @@
             if (originalToggleTheme) originalToggleTheme();
             setTimeout(updateFloatingLogos, 100);
         };
+        
+        // Check for success parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Show success overlay and redirect to vote page after 3 seconds
+            setTimeout(function() {
+                showLoginSuccessOverlay(
+                    'Login Successful!',
+                    'Welcome back! Redirecting you to cast your vote...',
+                    'Go to Vote',
+                    '../public/pages/vote.php'
+                );
+            }, 500);
+            
+            // Remove success parameter from URL to prevent showing overlay on refresh
+            setTimeout(function() {
+                const newUrl = window.location.pathname + window.location.hash;
+                window.history.replaceState({}, document.title, newUrl);
+            }, 1000);
+        }
     </script>
 </body>
 </html>

@@ -1,3 +1,8 @@
+<?php
+// Check if user is logged in
+require_once '../../auth/session.php';
+?>
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
   <head>
