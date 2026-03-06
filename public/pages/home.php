@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../../assets/css/global.css" />
     <link rel="stylesheet" href="../../assets/css/home.css" />
+    <link rel="stylesheet" href="../../assets/css/navbar.css" />
+    <link rel="stylesheet" href="../../assets/css/theme.css" />
     <link rel="website icon" type="png" sizes="32x32" href="../../img/logo/PTCI-logo.png">
 </head>
 <body>
@@ -59,6 +61,7 @@
                 <h4>Lovelie Reyes</h4>
                 <p>Vice President Candidate</p>
             </div>
+        </div>
     </section>
 
     <!-- Features Section -->
@@ -89,6 +92,7 @@
                 <h4>Cast Your Vote</h4>
                 <p>Select your preferred candidates and submit your vote</p>
             </div>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -96,7 +100,8 @@
 
     <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Generate 50 floating logos
+        // Generate floating logos - always use PTCI-logo.png
+        // The theme toggle will handle changing to ic2-namberwan.png in dark mode
         (function() {
             const container = document.getElementById('floatingLogos');
             const logoUrl = '../../img/logo/PTCI-logo.png';
@@ -113,11 +118,35 @@
                 const img = document.createElement('img');
                 img.src = logoUrl;
                 img.alt = 'PTCI';
+                img.className = 'theme-img';
+                img.dataset.light = logoUrl;
+                img.dataset.dark = '../../assets/img/ic2-namberwan.png';
                 
                 logo.appendChild(img);
                 container.appendChild(logo);
             }
         })();
+        
+        // Update floating logos when theme changes
+        function updateFloatingLogos() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const floatingLogos = document.querySelectorAll('.floating-logo img');
+            floatingLogos.forEach(img => {
+                img.src = isDark ? img.dataset.dark : img.dataset.light;
+            });
+        }
+        
+        // Listen for theme changes
+        const originalToggleTheme = window.toggleTheme;
+        window.toggleTheme = function() {
+            if (originalToggleTheme) originalToggleTheme();
+            setTimeout(updateFloatingLogos, 100);
+        };
+        
+        // Apply correct logo on page load
+        setTimeout(updateFloatingLogos, 100);
     </script>
 </body>
 </html>
+
+

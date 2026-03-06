@@ -10,9 +10,15 @@
     <link rel="stylesheet" href="../../assets/css/global.css" />
     <link rel="stylesheet" href="../../assets/css/form.css" />
     <link rel="stylesheet" href="../../assets/css/status.css" />
+    <link rel="stylesheet" href="../../assets/css/navbar.css" />
+    <link rel="stylesheet" href="../../assets/css/theme.css" />
     <link rel="website icon" type="png" sizes="32x32" href="../../img/logo/PTCI-logo.png">
 </head>
+
 <body class="form-body">
+
+    <!-- Navigation -->
+    <?php include '../components/navigationbar.php'; ?>
 
     <!-- Floating Logos Background -->
     <div class="form-floating-logos" id="formFloatingLogos"></div>
@@ -101,18 +107,41 @@
             for (let i = 0; i < count; i++) {
                 const logo = document.createElement('div');
                 logo.className = 'form-floating-logo';
-                logo.style.left              = Math.random() * 100 + '%';
-                logo.style.animationDelay    = (Math.random() * 5) + 's';
+                logo.style.top              = Math.random() * 100 + '%';
+                logo.style.left             = Math.random() * 100 + '%';
+                logo.style.animationDelay   = (Math.random() * 5) + 's';
                 logo.style.animationDuration = (20 + Math.random() * 10) + 's';
 
                 const img = document.createElement('img');
                 img.src = logoUrl;
                 img.alt = 'PTCI';
+                img.className = 'theme-img';
+                img.dataset.light = logoUrl;
+                img.dataset.dark = '../../assets/img/ic2-namberwan.png';
 
                 logo.appendChild(img);
                 container.appendChild(logo);
             }
         })();
+        
+        /* ── Update Floating Logos for Dark Mode ── */
+        function updateFloatingLogos() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const floatingLogos = document.querySelectorAll('.form-floating-logo img');
+            floatingLogos.forEach(img => {
+                img.src = isDark ? img.dataset.dark : img.dataset.light;
+            });
+        }
+        
+        // Apply correct logo on page load
+        setTimeout(updateFloatingLogos, 100);
+        
+        // Listen for theme changes
+        const originalToggleTheme = window.toggleTheme;
+        window.toggleTheme = function() {
+            if (originalToggleTheme) originalToggleTheme();
+            setTimeout(updateFloatingLogos, 100);
+        };
 
         /* ── Form Submission ── */
         document.getElementById('register').addEventListener('submit', function (e) {

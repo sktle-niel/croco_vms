@@ -9,9 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../assets/css/form.css" />
     <link rel="stylesheet" href="../assets/css/status.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css" />
+    <link rel="stylesheet" href="../assets/css/theme.css" />
     <link rel="website icon" type="png" sizes="32x32" href="../img/logo/PTCI-logo.png">
 </head>
 <body class="form-body">
+    <!-- Navigation -->
+    <?php include '../public/components/navigationbar.php'; ?>
+
     <!-- Floating Logos Background -->
     <div class="form-floating-logos" id="formFloatingLogos"></div>
 
@@ -88,11 +93,33 @@
                 const img = document.createElement('img');
                 img.src = logoUrl;
                 img.alt = 'PTCI';
+                img.className = 'theme-img';
+                img.dataset.light = logoUrl;
+                img.dataset.dark = '../assets/img/ic2-namberwan.png';
                 
                 logo.appendChild(img);
                 container.appendChild(logo);
             }
         })();
+        
+        // Update floating logos for dark mode
+        function updateFloatingLogos() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const floatingLogos = document.querySelectorAll('.form-floating-logo img');
+            floatingLogos.forEach(img => {
+                img.src = isDark ? img.dataset.dark : img.dataset.light;
+            });
+        }
+        
+        // Apply correct logo on page load
+        setTimeout(updateFloatingLogos, 100);
+        
+        // Listen for theme changes
+        const originalToggleTheme = window.toggleTheme;
+        window.toggleTheme = function() {
+            if (originalToggleTheme) originalToggleTheme();
+            setTimeout(updateFloatingLogos, 100);
+        };
     </script>
 </body>
 </html>
