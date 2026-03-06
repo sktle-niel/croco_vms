@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#">PTCI Student Council</a>
+    <a class="navbar-brand" href="#">INFORMATION COMMUNACATION CLUB</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navcol-5">
       <span class="navbar-toggler-icon"></span>
     </button>

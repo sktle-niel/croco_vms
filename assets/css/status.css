@@ -1,0 +1,221 @@
+.status-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.status-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.status-overlay .status-card {
+    background: #ffffff;
+    padding: 50px 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+    transform: scale(0.85);
+    transition: transform 0.3s ease;
+}
+
+.status-overlay.show .status-card {
+    transform: scale(1);
+}
+
+.status-overlay .status-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.status-overlay .status-icon i {
+    font-size: 40px;
+    color: #ffffff;
+}
+
+.status-overlay .status-icon.success {
+    background: #222;
+    box-shadow: 0 10px 30px rgba(34, 34, 34, 0.3);
+}
+
+.status-overlay .status-icon.invalid {
+    background: #dc3545;
+    box-shadow: 0 10px 30px rgba(220, 53, 69, 0.35);
+}
+
+.status-overlay .status-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.status-overlay .status-title.success {
+    color: #222;
+}
+
+.status-overlay .status-title.invalid {
+    color: #dc3545;
+}
+
+.status-overlay .status-subtitle {
+    color: #666666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.status-overlay .status-subtitle a {
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.status-overlay .status-subtitle a:hover {
+    text-decoration: underline;
+}
+
+.status-overlay .status-subtitle a.success-link {
+    color: #222;
+}
+
+.status-overlay .status-subtitle a.invalid-link {
+    color: #dc3545;
+}
+
+.status-overlay .status-btn {
+    background: #222222;
+    color: #ffffff;
+    border: none;
+    padding: 14px 45px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 20px rgba(34, 34, 34, 0.3);
+    width: 100%;
+}
+
+.status-overlay .status-btn:hover {
+    background: #444444;
+    transform: translateY(-2px);
+}
+
+.status-overlay .status-btn:active {
+    transform: translateY(0);
+}
+
+.status-overlay .otp-container {
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.status-overlay .otp-label {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.status-overlay .otp-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #222;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 4px;
+}
+
+.status-overlay .otp-copy-btn {
+    background: #222;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.status-overlay .otp-copy-btn:hover {
+    background: #444;
+}
+
+.status-overlay .otp-copy-btn i {
+    color: #fff;
+    font-size: 14px;
+}
+
+.status-overlay .otp-copied {
+    color: #28a745;
+    font-size: 0.85rem;
+    margin-top: 10px;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.status-overlay .otp-copied.show {
+    opacity: 1;
+}
+
+.status-overlay .auto-redirect {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.status-overlay .confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.status-overlay .confetti {
+    position: absolute;
+    top: -20px;
+    animation: confetti-fall 3s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+    to {
+        transform: translateY(450px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
