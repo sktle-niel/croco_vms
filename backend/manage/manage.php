@@ -115,18 +115,16 @@ function processManagePage() {
             if (!empty($fullname) && !empty($position)) {
                 $result = addCandidate($fullname, $position, $partylist, $electionbatch, $photoPath);
                 if ($result) {
-                    $_SESSION['message'] = 'Candidate added successfully!';
-                    $_SESSION['messageType'] = 'success';
+                    echo '<script>window.location.href = "' . $_SERVER['REQUEST_URI'] . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['message'] = 'Error adding candidate.';
-                    $_SESSION['messageType'] = 'error';
+                    $data['message'] = 'Error adding candidate.';
+                    $data['messageType'] = 'error';
                 }
             } else {
-                $_SESSION['message'] = 'Please fill in required fields.';
-                $_SESSION['messageType'] = 'error';
+                $data['message'] = 'Please fill in required fields.';
+                $data['messageType'] = 'error';
             }
-            header('Location: ' . $_SERVER['REQUEST_URI']); 
-            exit;
         }
 
         if ($_POST['action'] === 'delete') {
@@ -134,15 +132,13 @@ function processManagePage() {
             if ($candId > 0) {
                 $result = deleteCandidate($candId);
                 if ($result) {
-                    $_SESSION['message'] = 'Candidate removed successfully!';
-                    $_SESSION['messageType'] = 'success';
+                    echo '<script>window.location.href = "' . $_SERVER['REQUEST_URI'] . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['message'] = 'Error deleting candidate.';
-                    $_SESSION['messageType'] = 'error';
+                    $data['message'] = 'Error deleting candidate.';
+                    $data['messageType'] = 'error';
                 }
             }
-            header('Location: ' . $_SERVER['REQUEST_URI']); 
-            exit;
         }
     }
 
