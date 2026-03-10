@@ -30,16 +30,22 @@
                     <span>Results</span>
                 </a>
             </li>
+            <li class="nav-item <?php echo ($page === 'setup') ? 'active' : ''; ?>">
+                <a href="main.php?page=setup" class="nav-link">
+                    <i class="fas fa-cogs"></i>
+                    <span>Setup</span>
+                </a>
+            </li>
             <li class="nav-item <?php echo ($page === 'manage') ? 'active' : ''; ?>">
                 <a href="main.php?page=manage" class="nav-link">
                     <i class="fas fa-user-tie"></i>
                     <span>Manage Candidates</span>
                 </a>
             </li>
-            <li class="nav-item <?php echo ($page === 'setup') ? 'active' : ''; ?>">
-                <a href="main.php?page=setup" class="nav-link">
-                    <i class="fas fa-cogs"></i>
-                    <span>Setup</span>
+            <li class="nav-item <?php echo ($page === 'account') ? 'active' : ''; ?>">
+                <a href="main.php?page=account" class="nav-link">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Account</span>
                 </a>
             </li>
         </ul>
@@ -55,9 +61,5 @@
                     <span class="admin-name">Administrator</span>
                     <span class="admin-role">Admin</span>
                 </div>
-            <a href="../../auth/logout.php?type=admin" class="nav-link">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Logout</span>
-            </a>
         </div>
 </aside>

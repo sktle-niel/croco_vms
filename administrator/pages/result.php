@@ -1,78 +1,49 @@
 <!-- Results Page -->
+<?php
+require_once __DIR__ . '/../../backend/include.php';
+
+$candidates = getResultsCandidates();
+$maxVotes   = getMaxVotes($candidates);
+?>
+
 <div class="results-page">
     <div class="results-container">
 
-        <div class="candidate-card">
-            <img src="../../img/candidatesImg/gen.jpg" alt="Candidate" class="candidate-image">
-            <div class="candidate-info">
-                <div class="candidate-name">Gen M.</div>
-                <div class="candidate-position">President</div>
-                <div class="vote-count">45 votes</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 65%;"></div>
-                </div>
-            </div>
+        <?php if (empty($candidates)): ?>
+        <div class="empty-state">
+            <i class="fas fa-user-tie"></i>
+            <p>No candidates found.</p>
         </div>
+        <?php else: ?>
+            <?php foreach ($candidates as $c):
+                $barPct = round(($c['vote_count'] / $maxVotes) * 100);
+            ?>
+            <div class="candidate-card">
+                <?php if (!empty($c['cand_photo'])): ?>
+                    <img src="../../<?php echo htmlspecialchars($c['cand_photo']); ?>"
+                         alt="<?php echo htmlspecialchars($c['cand_fullname']); ?>"
+                         class="candidate-image"
+                         style="width:56px;height:56px;">
+                <?php else: ?>
+                    <div class="candidate-image" style="width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:#f0f0f0;">
+                        <i class="fas fa-user" style="font-size:2rem;color:#aaa;"></i>
+                    </div>
+                <?php endif; ?>
 
-        <div class="candidate-card">
-            <img src="../../img/candidatesImg/lennith.jpg" alt="Candidate" class="candidate-image">
-            <div class="candidate-info">
-                <div class="candidate-name">Lennith B.</div>
-                <div class="candidate-position">Vice President</div>
-                <div class="vote-count">38 votes</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 55%;"></div>
+                <div class="candidate-info">
+                    <div class="candidate-name"><?php echo htmlspecialchars($c['cand_fullname']); ?></div>
+                    <div class="candidate-position"><?php echo htmlspecialchars($c['cand_position']); ?></div>
+                    <?php if (!empty($c['cand_partylist'])): ?>
+                        <div class="candidate-partylist"><?php echo htmlspecialchars($c['cand_partylist']); ?></div>
+                    <?php endif; ?>
+                    <div class="vote-count"><?php echo number_format($c['vote_count']); ?> votes</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: <?php echo $barPct; ?>%;"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="candidate-card">
-            <img src="../../img/candidatesImg/jamie.jpeg" alt="Candidate" class="candidate-image">
-            <div class="candidate-info">
-                <div class="candidate-name">Jamie O.</div>
-                <div class="candidate-position">Secretary</div>
-                <div class="vote-count">52 votes</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 75%;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="candidate-card">
-            <img src="../../img/candidatesImg/lovelie.jpeg" alt="Candidate" class="candidate-image">
-            <div class="candidate-info">
-                <div class="candidate-name">Lovelie M.</div>
-                <div class="candidate-position">Treasurer</div>
-                <div class="vote-count">41 votes</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 60%;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="candidate-card">
-            <img src="../../img/candidatesImg/velly.jpg" alt="Candidate" class="candidate-image">
-            <div class="candidate-info">
-                <div class="candidate-name">Velly P.</div>
-                <div class="candidate-position">Auditor</div>
-                <div class="vote-count">29 votes</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 42%;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="candidate-card">
-            <img src="../../img/candidatesImg/gen.jpg" alt="Candidate" class="candidate-image">
-            <div class="candidate-info">
-                <div class="candidate-name">Mark T.</div>
-                <div class="candidate-position">P.R.O</div>
-                <div class="vote-count">33 votes</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 48%;"></div>
-                </div>
-            </div>
-        </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
     </div>
 </div>
