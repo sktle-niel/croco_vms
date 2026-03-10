@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 10, 2026 at 10:07 AM
+-- Generation Time: Mar 10, 2026 at 01:35 PM
 -- Server version: 8.0.44
 -- PHP Version: 8.3.30
 
@@ -40,7 +40,9 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `email`, `password`, `user_type`, `created_at`) VALUES
-('4552383', 'ptci.ic2official@gmail.com', '$2y$10$YQ1JEzBbMDTbMxUMhHUoVOHiJJFi9mJrpjHRjLgWTdCJBWUJxzGGe', 'administrator', '2026-03-10 06:45:47');
+('4165078', 'niel.ladica07@gmail.com', '$2y$10$/P52ZQ83/tYE4PTrod68sOKqxv7y8Vv3zDngVs4U7IEZSyI/35zEu', 'stelcom', '2026-03-10 10:46:25'),
+('4552383', 'ptci.ic2official@gmail.com', '$2y$10$YQ1JEzBbMDTbMxUMhHUoVOHiJJFi9mJrpjHRjLgWTdCJBWUJxzGGe', 'administrator', '2026-03-10 06:45:47'),
+('6807974', 'awdw@gmail.com', '$2y$10$fEJra3nCGRL/CA2G4jscjuu7U7IjoY4zDiiB6umnrfm/QaKr6HKX6', 'administrator', '2026-03-10 13:31:22');
 
 -- --------------------------------------------------------
 
@@ -53,9 +55,17 @@ CREATE TABLE `candidate` (
   `cand_fullname` varchar(100) DEFAULT NULL,
   `cand_partylist` varchar(45) DEFAULT NULL,
   `cand_position` varchar(45) DEFAULT NULL,
-  `cand_photo` varchar(45) DEFAULT NULL,
+  `cand_photo` varchar(255) DEFAULT NULL,
   `cand_electionbatch` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `candidate`
+--
+
+INSERT INTO `candidate` (`cand_id`, `cand_fullname`, `cand_partylist`, `cand_position`, `cand_photo`, `cand_electionbatch`) VALUES
+(4, 'Niel Patrick', 'ic2 only', 'President', 'img/candidatesImg/1773138501_Gemini_Generated_Image_6yxbgn6yxbgn6yxb.png', 2),
+(5, 'Niel Patrick Ladica', 'ic2 only', 'President', 'img/candidatesImg/1773149161_pngtree-sports-shoes-png-image_15910407.png', 2);
 
 -- --------------------------------------------------------
 
@@ -73,7 +83,8 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`dept_id`, `dept_name`) VALUES
-(11, 'BSIT');
+(11, 'BSIT'),
+(16, 'BSIT2');
 
 -- --------------------------------------------------------
 
@@ -84,10 +95,18 @@ INSERT INTO `department` (`dept_id`, `dept_name`) VALUES
 CREATE TABLE `election_batch` (
   `elc_id` int NOT NULL,
   `elc_name` varchar(45) DEFAULT NULL,
-  `elc_schoolyear` date DEFAULT NULL,
+  `elc_schoolyear` varchar(20) DEFAULT NULL,
   `elc_status` varchar(45) DEFAULT NULL,
-  `elc_createdby` int DEFAULT NULL
+  `elc_createdby` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `election_batch`
+--
+
+INSERT INTO `election_batch` (`elc_id`, `elc_name`, `elc_schoolyear`, `elc_status`, `elc_createdby`) VALUES
+(2, 'STUDENT COUNCIL', '2026 - 2027', 'active', 'IC2'),
+(3, 'STUDENT COUNCIL2', '2026 - 2027', 'active', 'IC2');
 
 -- --------------------------------------------------------
 
@@ -119,7 +138,8 @@ CREATE TABLE `partylist` (
 --
 
 INSERT INTO `partylist` (`partylist_id`, `partylist_name`) VALUES
-(1, 'IC2 TEAM');
+(2, 'awd'),
+(3, 'UG');
 
 -- --------------------------------------------------------
 
@@ -134,6 +154,7 @@ CREATE TABLE `users` (
   `department` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `otp` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_verified` tinyint(1) DEFAULT '0',
+  `is_voted` tinyint(1) DEFAULT '0',
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `verified_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -142,16 +163,29 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `school_id`, `full_name`, `department`, `otp`, `is_verified`, `created_at`, `verified_at`) VALUES
-('1744261', '220054', 'Niel Patrick L. Penlas', 'Bachelor of Science in Hospitality Management', '679732', 0, '2026-03-06 13:19:29', NULL),
-('3156505', '220058', 'niel', 'Senior Highschool', '000029', 0, '2026-03-06 17:38:43', NULL),
-('3369781', '220052', 'Niel Patrick L. Penlas', 'Bachelor of Science in Information Communication Technology', '534869', 0, '2026-03-06 12:41:35', NULL),
-('3849548', '220053', 'Niel Patrick L. Penlas', 'Bachelor of Science in Information Communication Technology', '614198', 0, '2026-03-06 13:03:59', NULL),
-('4540964', '220041', 'Niel', 'Bachelor of Science in Hospitality Management', '047274', 0, '2026-03-10 13:29:57', NULL),
-('5228257', '220056', 'Niel Patrick L Penlas', 'Bachelor of Science in Information Communication Technology', '095533', 0, '2026-03-06 12:06:59', NULL),
-('6121508', '220057', 'niel', 'Associate in Computer Technology', '425862', 0, '2026-03-06 17:34:51', NULL),
-('8688483', '220050', 'Niel', 'Senior Highschool', '392224', 1, '2026-03-10 13:17:42', NULL),
-('8747552', '220051', 'Niel Patrick L Penlas', 'Bachelor of Science in Information Communication Technology', '272447', 0, '2026-03-06 12:11:57', NULL);
+INSERT INTO `users` (`id`, `school_id`, `full_name`, `department`, `otp`, `is_verified`, `is_voted`, `created_at`, `verified_at`) VALUES
+('1744261', '220054', 'Niel Patrick L. Penlas', 'Bachelor of Science in Hospitality Management', '679732', 0, 0, '2026-03-06 13:19:29', NULL),
+('3156505', '220058', 'niel', 'Senior Highschool', '000029', 0, 0, '2026-03-06 17:38:43', NULL),
+('3369781', '220052', 'Niel Patrick L. Penlas', 'Bachelor of Science in Information Communication Technology', '534869', 0, 0, '2026-03-06 12:41:35', NULL),
+('3849548', '220053', 'Niel Patrick L. Penlas', 'Bachelor of Science in Information Communication Technology', '614198', 0, 0, '2026-03-06 13:03:59', NULL),
+('4540964', '220041', 'Niel', 'Bachelor of Science in Hospitality Management', '047274', 0, 0, '2026-03-10 13:29:57', NULL),
+('5228257', '220056', 'Niel Patrick L Penlas', 'Bachelor of Science in Information Communication Technology', '095533', 0, 0, '2026-03-06 12:06:59', NULL),
+('6121508', '220057', 'niel', 'Associate in Computer Technology', '425862', 0, 0, '2026-03-06 17:34:51', NULL),
+('8688483', '220050', 'Niel', 'Senior Highschool', '392224', 1, 0, '2026-03-10 13:17:42', NULL),
+('8747552', '220051', 'Niel Patrick L Penlas', 'Bachelor of Science in Information Communication Technology', '272447', 0, 0, '2026-03-06 12:11:57', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `votes`
+--
+
+CREATE TABLE `votes` (
+  `vote_id` int NOT NULL,
+  `user_id` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cand_id` int NOT NULL,
+  `voted_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -206,6 +240,14 @@ ALTER TABLE `users`
   ADD KEY `idx_created_at` (`created_at`);
 
 --
+-- Indexes for table `votes`
+--
+ALTER TABLE `votes`
+  ADD PRIMARY KEY (`vote_id`),
+  ADD KEY `idx_user_id` (`user_id`),
+  ADD KEY `idx_cand_id` (`cand_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -213,19 +255,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `candidate`
 --
 ALTER TABLE `candidate`
-  MODIFY `cand_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `cand_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `dept_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `dept_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `election_batch`
 --
 ALTER TABLE `election_batch`
-  MODIFY `elc_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `elc_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `otp_verifications`
@@ -237,7 +279,13 @@ ALTER TABLE `otp_verifications`
 -- AUTO_INCREMENT for table `partylist`
 --
 ALTER TABLE `partylist`
-  MODIFY `partylist_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `partylist_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `votes`
+--
+ALTER TABLE `votes`
+  MODIFY `vote_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -249,6 +297,13 @@ ALTER TABLE `partylist`
 ALTER TABLE `candidate`
   ADD CONSTRAINT `election_event` FOREIGN KEY (`cand_electionbatch`) REFERENCES `election_batch` (`elc_id`),
   ADD CONSTRAINT `election_evnt` FOREIGN KEY (`cand_electionbatch`) REFERENCES `election_batch` (`elc_id`);
+
+--
+-- Constraints for table `votes`
+--
+ALTER TABLE `votes`
+  ADD CONSTRAINT `fk_votes_cand` FOREIGN KEY (`cand_id`) REFERENCES `candidate` (`cand_id`),
+  ADD CONSTRAINT `fk_votes_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

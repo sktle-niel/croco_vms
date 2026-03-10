@@ -223,17 +223,16 @@ function processSetupPage() {
             if (!empty($name)) {
                 $result = addPartylist($name);
                 if ($result) {
-                    $_SESSION['flash_message'] = 'Partylist added successfully!';
-                    $_SESSION['flash_type']    = 'success';
+                    echo '<script>window.location.href = "' . $redirect . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['flash_message'] = 'Error adding partylist.';
-                    $_SESSION['flash_type']    = 'error';
+                    $data['message'] = 'Error adding partylist.';
+                    $data['messageType'] = 'error';
                 }
             } else {
-                $_SESSION['flash_message'] = 'Partylist name is required.';
-                $_SESSION['flash_type']    = 'error';
+                $data['message'] = 'Partylist name is required.';
+                $data['messageType'] = 'error';
             }
-            header('Location: ' . $redirect); exit;
         }
 
         if ($_POST['action'] === 'delete_partylist') {
@@ -241,14 +240,13 @@ function processSetupPage() {
             if ($id > 0) {
                 $result = deletePartylist($id);
                 if ($result) {
-                    $_SESSION['flash_message'] = 'Partylist removed successfully!';
-                    $_SESSION['flash_type']    = 'success';
+                    echo '<script>window.location.href = "' . $redirect . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['flash_message'] = 'Error deleting partylist.';
-                    $_SESSION['flash_type']    = 'error';
+                    $data['message'] = 'Error deleting partylist.';
+                    $data['messageType'] = 'error';
                 }
             }
-            header('Location: ' . $redirect); exit;
         }
 
         if ($_POST['action'] === 'add_batch') {
@@ -260,17 +258,16 @@ function processSetupPage() {
             if (!empty($elc_name) && !empty($elc_schoolyear)) {
                 $result = addElectionBatch($elc_name, $elc_schoolyear, $elc_status, $elc_createdby);
                 if ($result) {
-                    $_SESSION['flash_message'] = 'Election batch added successfully!';
-                    $_SESSION['flash_type']    = 'success';
+                    echo '<script>window.location.href = "' . $redirect . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['flash_message'] = 'Error adding election batch.';
-                    $_SESSION['flash_type']    = 'error';
+                    $data['message'] = 'Error adding election batch.';
+                    $data['messageType'] = 'error';
                 }
             } else {
-                $_SESSION['flash_message'] = 'Election name and school year are required.';
-                $_SESSION['flash_type']    = 'error';
+                $data['message'] = 'Election name and school year are required.';
+                $data['messageType'] = 'error';
             }
-            header('Location: ' . $redirect); exit;
         }
 
         if ($_POST['action'] === 'delete_batch') {
@@ -278,14 +275,13 @@ function processSetupPage() {
             if ($id > 0) {
                 $result = deleteElectionBatch($id);
                 if ($result) {
-                    $_SESSION['flash_message'] = 'Election batch removed successfully!';
-                    $_SESSION['flash_type']    = 'success';
+                    echo '<script>window.location.href = "' . $redirect . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['flash_message'] = 'Error deleting election batch.';
-                    $_SESSION['flash_type']    = 'error';
+                    $data['message'] = 'Error deleting election batch.';
+                    $data['messageType'] = 'error';
                 }
             }
-            header('Location: ' . $redirect); exit;
         }
 
         if ($_POST['action'] === 'add_department') {
@@ -293,17 +289,16 @@ function processSetupPage() {
             if (!empty($dept)) {
                 $result = addDepartment($dept);
                 if ($result) {
-                    $_SESSION['flash_message'] = 'Department added successfully!';
-                    $_SESSION['flash_type']    = 'success';
+                    echo '<script>window.location.href = "' . $redirect . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['flash_message'] = 'Error adding department.';
-                    $_SESSION['flash_type']    = 'error';
+                    $data['message'] = 'Error adding department.';
+                    $data['messageType'] = 'error';
                 }
             } else {
-                $_SESSION['flash_message'] = 'Department name is required.';
-                $_SESSION['flash_type']    = 'error';
+                $data['message'] = 'Department name is required.';
+                $data['messageType'] = 'error';
             }
-            header('Location: ' . $redirect); exit;
         }
 
         if ($_POST['action'] === 'delete_department') {
@@ -311,14 +306,13 @@ function processSetupPage() {
             if ($id > 0) {
                 $result = deleteDepartment($id);
                 if ($result) {
-                    $_SESSION['flash_message'] = 'Department removed successfully!';
-                    $_SESSION['flash_type']    = 'success';
+                    echo '<script>window.location.href = "' . $redirect . '";</script>';
+                    exit;
                 } else {
-                    $_SESSION['flash_message'] = 'Error deleting department.';
-                    $_SESSION['flash_type']    = 'error';
+                    $data['message'] = 'Error deleting department.';
+                    $data['messageType'] = 'error';
                 }
             }
-            header('Location: ' . $redirect); exit;
         }
     }
 
