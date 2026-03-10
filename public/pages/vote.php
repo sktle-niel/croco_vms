@@ -1,5 +1,4 @@
 <?php
-// Check if user is logged in
 require_once '../../auth/session.php';
 ?>
 
