@@ -23,7 +23,7 @@ require_once '../../auth/session.php';
     <div class="floating-logos-bg" id="floatingLogos"></div>
 
     <!-- Navigation -->
-    <?php include '../components/navigationbar.php'; ?>
+    <?php include '../../components/navigationbar.php'; ?>
 
     <!-- Main Content -->
     <div class="container-main mt-5">
@@ -128,7 +128,7 @@ require_once '../../auth/session.php';
     </div>
 
     <!-- Footer -->
-    <?php include '../components/footer.php'; ?>
+    <?php include '../../components/footer.php'; ?>
 
     <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>

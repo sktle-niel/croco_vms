@@ -18,7 +18,7 @@
 <body class="form-body">
 
     <!-- Navigation -->
-    <?php include '../components/navigationbar.php'; ?>
+    <?php include '../../components/navigationbar.php'; ?>
 
     <!-- Floating Logos Background -->
     <div class="form-floating-logos" id="formFloatingLogos"></div>
@@ -80,21 +80,24 @@
             </div>
 
         </div>
+
     </div>
+
+    
 
     <!-- Bootstrap JS -->
     <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Success Overlay -->
     <?php
-    include '../../public/components/successMessage.php';
-    renderSuccessOverlay();
+    include '../../components/successMessage.php';
+    renderLoginSuccessOverlay();
     ?>
 
     <!-- Invalid Overlay -->
     <?php
-    include '../../public/components/invalidMessage.php';
-    renderInvalidOverlay();
+    include '../../components/invalidMessage.php';
+    renderLoginInvalidOverlay();
     ?>
 
     <script>
