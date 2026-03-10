@@ -15,7 +15,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <?php include '../components/navigationbar.php'; ?>
+    <?php include '../../components/navigationbar.php'; ?>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -96,7 +96,7 @@
     </section>
 
     <!-- Footer -->
-    <?php include '../components/footer.php'; ?>
+    <?php include '../../components/footer.php'; ?>
 
     <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>

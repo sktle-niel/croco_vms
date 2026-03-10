@@ -320,7 +320,7 @@
 }
 
 [data-theme="dark"] .form-logo img {
-  filter: brightness(0) invert(1);
+  filter: none;
 }
 
 [data-theme="dark"] .form-header h1 {

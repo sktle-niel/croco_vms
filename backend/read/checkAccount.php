@@ -3,9 +3,9 @@
  * Check Account Function
  * Checks if an account exists and is verified
  * 
- * @param string $schoolID - Student ID or LRN
- * @param string $otp - One Time Password
- * @return array - Returns array with success status and user data or error message
+ * @param string 
+ * @param string 
+ * @return array 
  */
 function checkAccount($schoolID, $otp) {
     require_once '../../connection/connection.php';

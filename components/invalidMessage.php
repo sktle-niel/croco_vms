@@ -1,5 +1,5 @@
 <?php
-function renderInvalidOverlay() {
+function renderLoginInvalidOverlay() {
 ?>
 <div class="status-overlay" id="invalidOverlay">
     <div class="status-card">

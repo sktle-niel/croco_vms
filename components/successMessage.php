@@ -1,5 +1,5 @@
 <?php
-function renderSuccessOverlay() {
+function renderLoginSuccessOverlay() {
 ?>
 <div class="status-overlay" id="successOverlay">
     <div class="status-card">
@@ -28,13 +28,13 @@ function renderSuccessOverlay() {
         <button class="status-btn" id="successBtn" onclick="proceedToLogin()">Proceed to Login</button>
         
         <div class="auto-redirect">
-            Redirecting in <span id="countdown">7</span> seconds...
+            Redirecting in <span id="countdown">5</span> seconds...
         </div>
     </div>
 </div>
 
 <script>
-    let countdownValue = 7;
+  let countdownValue = 5;
     let countdownInterval = null;
     let currentOTP = '';
 
@@ -87,7 +87,7 @@ function renderSuccessOverlay() {
     }
     
     function startCountdown(redirectUrl) {
-        countdownValue = 7;
+        countdownValue = 5;
         document.getElementById('countdown').textContent = countdownValue;
         
         if (countdownInterval) {
@@ -158,11 +158,17 @@ function renderSuccessOverlay() {
         }, 2000);
     }
     
+    let currentRedirectUrl = '../public/pages/vote.php';
+
+    function showSuccessOverlay(title, subtitle, buttonText, redirectUrl, otp = null) {
+        currentRedirectUrl = redirectUrl || '../public/pages/vote.php';
+    }
+
     function proceedToLogin() {
         if (countdownInterval) {
             clearInterval(countdownInterval);
         }
-        window.location.href = '../../auth/form.php';
+        window.location.href = currentRedirectUrl;
     }
     
     function hideSuccessOverlay() {
