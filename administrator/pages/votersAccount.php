@@ -1,8 +1,15 @@
 <!-- Voters Account Page -->
+<?php
+require_once __DIR__ . '/../../backend/include.php';
+
+$users = getVoters();
+?>
+
 <div class="voters-page">
     <div class="data-table-container">
         <div class="table-header">
             <h2>Voters Account List</h2>
+            <span><?php echo count($users); ?> voters</span>
         </div>
         <table class="data-table">
             <thead>
@@ -10,40 +17,34 @@
                     <th>Student ID / LRN</th>
                     <th>Name</th>
                     <th>Department</th>
-                    <th>Status</th>
+                    <th>Verified</th>
+                    <th>Voted</th>
                 </tr>
             </thead>
             <tbody>
+                <?php if (empty($users)): ?>
                 <tr>
-                    <td>2024-001</td>
-                    <td>John Doe</td>
-                    <td>Senior Highschool</td>
-                    <td><span class="status-badge active">Voted</span></td>
+                    <td colspan="5" style="text-align:center;">No voters found.</td>
                 </tr>
-                <tr>
-                    <td>2024-002</td>
-                    <td>Jane Smith</td>
-                    <td>BSICT</td>
-                    <td><span class="status-badge active">Voted</span></td>
-                </tr>
-                <tr>
-                    <td>2024-003</td>
-                    <td>Mike Johnson</td>
-                    <td>BSHM</td>
-                    <td><span class="status-badge inactive">Not Voted</span></td>
-                </tr>
-                <tr>
-                    <td>2024-004</td>
-                    <td>Sarah Williams</td>
-                    <td>BSIS</td>
-                    <td><span class="status-badge active">Voted</span></td>
-                </tr>
-                <tr>
-                    <td>2024-005</td>
-                    <td>David Brown</td>
-                    <td>BSOA</td>
-                    <td><span class="status-badge inactive">Not Voted</span></td>
-                </tr>
+                <?php else: ?>
+                    <?php foreach ($users as $u): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($u['school_id']); ?></td>
+                        <td><?php echo htmlspecialchars($u['full_name']); ?></td>
+                        <td><?php echo htmlspecialchars($u['department']); ?></td>
+                        <td>
+                            <span class="status-badge <?php echo $u['is_verified'] ? 'active' : 'inactive'; ?>">
+                                <?php echo $u['is_verified'] ? 'Verified' : 'Unverified'; ?>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status-badge <?php echo $u['is_voted'] ? 'active' : 'inactive'; ?>">
+                                <?php echo $u['is_voted'] ? 'Voted' : 'Not Voted'; ?>
+                            </span>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
     </div>

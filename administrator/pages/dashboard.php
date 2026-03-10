@@ -1,52 +1,75 @@
 <!-- Dashboard Page -->
+<?php
+require_once __DIR__ . '/../../backend/include.php';
+
+$stats           = getDashboardStats();
+$totalVoters     = $stats['totalVoters'];
+$totalVoted      = $stats['totalVoted'];
+$totalPending    = $stats['totalPending'];
+$totalCandidates = $stats['totalCandidates'];
+
+// Get candidates with votes
+$candidates = getCandidatesWithVotes();
+
+// Calculate max votes and percentage
+$maxVotes    = getMaxVotes($candidates);
+$votePercent = getVotePercent($totalVoted, $totalVoters);
+?>
+
+
 <div class="dashboard-page">
 
-    <div class="data-table-container">
-        <div class="table-header">
-            <h2>Recent Voting Activity</h2>
+    <div class="rankings-container">
+        <div class="rankings-header">
+            <h2>Candidate Rankings</h2>
+            <span><?php echo count($candidates); ?> candidates</span>
         </div>
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Time Voted</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>2024-001</td>
-                    <td>John Doe</td>
-                    <td>10:30 AM</td>
-                    <td><span class="status-badge active">Voted</span></td>
-                </tr>
-                <tr>
-                    <td>2024-002</td>
-                    <td>Jane Smith</td>
-                    <td>10:15 AM</td>
-                    <td><span class="status-badge active">Voted</span></td>
-                </tr>
-                <tr>
-                    <td>2024-003</td>
-                    <td>Mike Johnson</td>
-                    <td>09:45 AM</td>
-                    <td><span class="status-badge active">Voted</span></td>
-                </tr>
-                <tr>
-                    <td>2024-004</td>
-                    <td>Sarah Williams</td>
-                    <td>09:30 AM</td>
-                    <td><span class="status-badge pending">Pending</span></td>
-                </tr>
-                <tr>
-                    <td>2024-005</td>
-                    <td>David Brown</td>
-                    <td>09:00 AM</td>
-                    <td><span class="status-badge active">Voted</span></td>
-                </tr>
-            </tbody>
-        </table>
+
+        <?php if (empty($candidates)): ?>
+        <div class="empty-state">
+            <i class="fas fa-user-tie"></i>
+            <p>No candidates found.</p>
+        </div>
+        <?php else: ?>
+            <?php foreach ($candidates as $i => $c):
+                $rank    = $i + 1;
+                $barPct  = round(($c['vote_count'] / $maxVotes) * 100);
+                $medal   = $rank === 1 ? '🥇' : ($rank === 2 ? '🥈' : ($rank === 3 ? '🥉' : null));
+            ?>
+            <div class="rank-row">
+                <div class="rank-number <?php echo $medal ? '' : 'plain'; ?>">
+                    <?php echo $medal ?? '#' . $rank; ?>
+                </div>
+
+                <?php if (!empty($c['cand_photo'])): ?>
+                    <img src="../../<?php echo htmlspecialchars($c['cand_photo']); ?>"
+                         alt="<?php echo htmlspecialchars($c['cand_fullname']); ?>"
+                         class="rank-photo">
+                <?php else: ?>
+                    <div class="rank-photo-placeholder"><i class="fas fa-user"></i></div>
+                <?php endif; ?>
+
+                <div class="rank-info">
+                    <div class="rank-name"><?php echo htmlspecialchars($c['cand_fullname']); ?></div>
+                    <div class="rank-meta">
+                        <?php echo htmlspecialchars($c['cand_position']); ?>
+                        <?php if (!empty($c['cand_partylist'])): ?>
+                            &nbsp;·&nbsp;<?php echo htmlspecialchars($c['cand_partylist']); ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="rank-bar-wrap">
+                    <div class="rank-bar-fill" style="width: <?php echo $barPct; ?>%;"></div>
+                </div>
+
+                <div class="rank-votes">
+                    <?php echo number_format($c['vote_count']); ?>
+                    <small>votes</small>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
 </div>

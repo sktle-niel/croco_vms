@@ -3,7 +3,7 @@
 $page = $_GET['page'] ?? 'dashboard';
 
 // Define allowed pages
-$allowed_pages = ['dashboard', 'votersAccount', 'result', 'manage', 'setup'];
+$allowed_pages = ['dashboard', 'votersAccount', 'result', 'manage', 'setup', 'account'];
 
 if (!in_array($page, $allowed_pages)) {
     $page = 'dashboard';
