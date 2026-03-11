@@ -29,6 +29,12 @@ require_once __DIR__ . '/../backend/include.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../assets/css/theme.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/manage.css">
+    <link rel="stylesheet" href="css/results.css">
+    <link rel="stylesheet" href="css/voting.css">
+    <link rel="stylesheet" href="css/common.css">
     <link rel="website icon" type="png" sizes="32x32" href="../img/logo/PTCI-logo.png">
 </head>
 <body class="admin-body">
