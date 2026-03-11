@@ -1,0 +1,240 @@
+/* Common Styles - Shared across all pages */
+
+/* Alert Messages */
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid;
+    margin-bottom: 16px;
+}
+
+.alert-success {
+    background: #f0fff4;
+    color: var(--success-color);
+    border-color: #c3e6cb;
+}
+
+.alert-error {
+    background: #fff1f1;
+    color: var(--danger-color);
+    border-color: #f5c6cb;
+}
+
+[data-theme="dark"] .alert-success {
+    background: #0d2a1a;
+    border-color: #1a4a2a;
+}
+
+[data-theme="dark"] .alert-error {
+    background: #2a0d0d;
+    border-color: #4a1a1a;
+}
+
+/* Empty State */
+
+.empty-state {
+    padding: 48px 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.empty-state i {
+    display: block;
+    font-size: 28px;
+    opacity: 0.25;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Status Badge */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.status-badge::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.status-badge.active {
+    background: #f0fff4;
+    color: #16a34a;
+}
+
+.status-badge.active::before {
+    background: #16a34a;
+}
+
+.status-badge.inactive {
+    background: #fff1f1;
+    color: #dc2626;
+}
+
+.status-badge.inactive::before {
+    background: #dc2626;
+}
+
+.status-badge.pending {
+    background: #fffbeb;
+    color: #d97706;
+}
+
+.status-badge.pending::before {
+    background: #d97706;
+}
+
+[data-theme="dark"] .status-badge.active {
+    background: #0d2a1a;
+    color: #4ade80;
+}
+
+[data-theme="dark"] .status-badge.inactive {
+    background: #2a0d0d;
+    color: #f87171;
+}
+
+[data-theme="dark"] .status-badge.pending {
+    background: #2a1e0d;
+    color: #fbbf24;
+}
+
+/* Action Buttons */
+
+.btn-action {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    transition: all var(--transition);
+    margin-right: 4px;
+    color: var(--text-secondary);
+}
+
+.btn-action.btn-edit:hover {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    background: var(--bg);
+}
+
+.btn-action.btn-delete:hover {
+    border-color: #dc2626;
+    color: #dc2626;
+    background: #fff1f1;
+}
+
+/* Add Button */
+
+.btn-add {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: var(--text-primary);
+    color: var(--bg-card);
+    border: none;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.btn-add:hover {
+    opacity: 0.8;
+}
+
+/* Data Table */
+
+.data-table-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.table-header h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead th {
+    padding: 10px 20px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.data-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition);
+}
+
+.data-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background: var(--bg);
+}
+
+.data-table tbody td {
+    padding: 12px 20px;
+    font-size: 13px;
+    color: var(--text-primary);
+    font-family: 'DM Mono', monospace;
+}
+
+.data-table tbody td:nth-child(3) {
+    font-family: 'DM Sans', sans-serif;
+}
+
