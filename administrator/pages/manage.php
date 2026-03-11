@@ -6,6 +6,7 @@ $manageData = processManagePage();
 $message = $manageData['message'];
 $messageType = $manageData['messageType'];
 $electionBatches = $manageData['electionBatches'];
+$partylists = $manageData['partylists'];
 $candidates = $manageData['candidates'];
 ?>
 
@@ -50,7 +51,14 @@ $candidates = $manageData['candidates'];
 
                 <div class="field-group">
                     <label>Partylist</label>
-                    <input type="text" name="partylist" placeholder="e.g. Ic2 Team">
+                    <select name="partylist">
+                        <option value="">Select Partylist</option>
+                        <?php foreach ($partylists as $pl): ?>
+                        <option value="<?php echo htmlspecialchars($pl['partylist_name']); ?>">
+                            <?php echo htmlspecialchars($pl['partylist_name']); ?>
+                        </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <div class="field-group">
@@ -152,8 +160,7 @@ $candidates = $manageData['candidates'];
                             <form method="POST">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="cand_id" value="<?php echo $c['cand_id']; ?>">
-                                <button type="submit" class="btn-remove"
-                                    onclick="return confirm('Remove <?php echo htmlspecialchars($c['cand_fullname']); ?>?')">
+                                <button type="submit" class="btn-remove"">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>

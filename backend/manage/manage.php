@@ -93,6 +93,7 @@ function processManagePage() {
         'message'          => '',
         'messageType'      => '',
         'electionBatches'  => [],
+        'partylists'       => [],
         'candidates'       => []
     ];
     
@@ -151,6 +152,9 @@ function processManagePage() {
 
     // Fetch election batches for dropdown
     $data['electionBatches'] = getElectionBatches();
+
+    // Fetch partylists for dropdown
+    $data['partylists'] = getPartylists();
 
     // Fetch all candidates
     $data['candidates'] = getAllCandidates();

@@ -12,11 +12,11 @@ if (!in_array($page, $allowed_pages)) {
 // Include session check
 require_once __DIR__ . '/../backend/include.php';
 
-// Check if admin is logged in (commented out for UI testing)
-// if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-//     header('Location: ../auth/admin.php');
-//     exit;
-// }
+// Check if admin is logged in
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: ../auth/admin.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,7 @@ require_once __DIR__ . '/../backend/include.php';
                     <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
                         <i class="fas fa-sun" id="themeIcon"></i>
                     </div>
-                    <a href="../auth/logout.php" class="btn btn-logout">
+                    <a href="../auth/logout.php?type=admin" class="btn btn-logout">
                         <i class="fas fa-sign-out-alt"></i> Logout
                     </a>
                 </div>
@@ -72,6 +72,7 @@ require_once __DIR__ . '/../backend/include.php';
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
         updateThemeIcon(savedTheme);
+        updateSidebarLogo(savedTheme);
 
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
@@ -80,6 +81,7 @@ require_once __DIR__ . '/../backend/include.php';
             document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateThemeIcon(newTheme);
+            updateSidebarLogo(newTheme);
         }
 
         function updateThemeIcon(theme) {
@@ -88,6 +90,17 @@ require_once __DIR__ . '/../backend/include.php';
                 icon.className = 'fas fa-moon';
             } else {
                 icon.className = 'fas fa-sun';
+            }
+        }
+
+        function updateSidebarLogo(theme) {
+            const logo = document.getElementById('sidebarLogo');
+            if (logo) {
+                if (theme === 'dark') {
+                    logo.src = '../../assets/img/ic2-namberwan.png';
+                } else {
+                    logo.src = '../../assets/img/ic2-nambertwo.png';
+                }
             }
         }
     </script>

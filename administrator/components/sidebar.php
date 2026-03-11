@@ -2,7 +2,7 @@
 <aside class="admin-sidebar">
     <div class="sidebar-header">
         <a href="main.php?page=dashboard" class="sidebar-brand">
-            <img src="../../img/logo/PTCI-logo.png" alt="PTCI Logo" class="sidebar-logo">
+            <img src="../../assets/img/ic2-nambertwo.png" alt="PTCI Logo" class="sidebar-logo" id="sidebarLogo">
             <div class="sidebar-brand-text">
                 <span class="brand-main">PTCI</span>
                 <span class="brand-sub">Admin Portal</span>

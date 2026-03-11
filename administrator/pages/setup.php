@@ -27,7 +27,7 @@ renderAdminInvalidOverlay();
 
             <form method="POST" class="voting-panel-form">
                 <input type="hidden" name="action" value="add_partylist">
-                <input type="text" name="partylist_name" placeholder="e.g. Uniteam" required>
+                <input type="text" name="partylist_name" placeholder="e.g. IIC2 TEAM" required>
                 <button type="submit" class="btn-add-item">
                     <i class="fas fa-plus"></i> Add
                 </button>
@@ -69,7 +69,7 @@ renderAdminInvalidOverlay();
 
             <form method="POST" class="voting-panel-form" style="flex-direction: column; gap: 8px;">
                 <input type="hidden" name="action" value="add_batch">
-                <input type="text" name="elc_name" placeholder="Election name e.g. SSG Election" required>
+                <input type="text" name="elc_name" placeholder="Election name e.g. IC2 ELECTION" required>
                 <input type="text" name="elc_schoolyear" placeholder="School year e.g. 2025-2026" required>
                 <input type="text" name="elc_createdby" placeholder="Created by e.g. Admin">
                 <select name="elc_status">
