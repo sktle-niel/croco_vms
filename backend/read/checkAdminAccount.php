@@ -1,7 +1,5 @@
 <?php
 /**
- * Check Admin Account Function
- * Checks if an admin account exists and password matches
  * 
  * @param string $email
  * @param string $password

@@ -1,14 +1,8 @@
 <?php
-/**
- * Dashboard Data Functions
- * 
- * Functions to retrieve dashboard statistics and candidate data
- */
 
 require_once __DIR__ . '/../../connection/connection.php';
 
 /**
- * Get dashboard statistics
  * 
  * @return array Returns associative array with keys: totalVoters, totalVoted, totalPending, totalCandidates
  */
@@ -36,7 +30,6 @@ function getDashboardStats() {
 }
 
 /**
- * Get candidates with their vote counts
  * 
  * @return array Returns array of candidate data with vote counts
  */
@@ -94,27 +87,6 @@ function getVotePercent($totalVoted, $totalVoters) {
 }
 
 /**
- * Get all voters/users
- * 
- * @return array Returns array of user data
- */
-function getVoters() {
-    $users = [];
-    
-    try {
-        $pdo   = getDBConnection();
-        $users = $pdo->query("SELECT school_id, full_name, department, is_verified, is_voted FROM users ORDER BY created_at DESC")->fetchAll();
-        
-    } catch (PDOException $e) {
-        error_log("Error getting voters: " . $e->getMessage());
-    }
-    
-    return $users;
-}
-
-/**
- * Get candidates with vote counts for results page
- * Ordered by position ASC, then vote count DESC
  * 
  * @return array Returns array of candidate data with vote counts
  */
