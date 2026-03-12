@@ -33,7 +33,9 @@ $votePercent = getVotePercent($totalVoted, $totalVoters);
         <?php else: ?>
             <?php foreach ($candidates as $i => $c):
                 $rank    = $i + 1;
-                $barPct  = round(($c['vote_count'] / $maxVotes) * 100);
+
+                $barPct  = $totalVoters > 0 ? round(($c['vote_count'] / $totalVoters) * 100) : 0;
+
                 $medal   = $rank === 1 ? '🥇' : ($rank === 2 ? '🥈' : ($rank === 3 ? '🥉' : null));
             ?>
             <div class="rank-row">
