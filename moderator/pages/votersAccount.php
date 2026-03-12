@@ -99,11 +99,13 @@ $departments = getUserDepartments();
             <span><?php echo count($users); ?> voters</span>
         </div>
         <table class="data-table">
+
             <thead>
                 <tr>
                     <th>Student ID / LRN</th>
                     <th>Name</th>
                     <th>Department</th>
+                    <th>OTP</th>
                     <th>Verified</th>
                     <th>Voted</th>
                     <th>Actions</th>
@@ -117,9 +119,11 @@ $departments = getUserDepartments();
                 <?php else: ?>
                     <?php foreach ($users as $u): ?>
                     <tr>
+
                         <td><?php echo htmlspecialchars($u['school_id']); ?></td>
                         <td><?php echo htmlspecialchars($u['full_name']); ?></td>
                         <td><?php echo htmlspecialchars($u['department']); ?></td>
+                        <td><?php echo htmlspecialchars($u['otp'] ?? 'N/A'); ?></td>
                         <td>
                             <span class="status-badge <?php echo $u['is_verified'] ? 'active' : 'inactive'; ?>">
                                 <?php echo $u['is_verified'] ? 'Verified' : 'Unverified'; ?>
