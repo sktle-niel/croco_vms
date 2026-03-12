@@ -14,7 +14,7 @@
     <link rel="website icon" type="png" sizes="32x32" href="../../img/logo/PTCI-logo.png">
 </head>
 <body>
-    <?php include '../components/navigationbar.php'; ?>
+    <?php include '../../components/navigationbar.php'; ?>
 
     <section class="hero">
         <!-- Floating Logos Background -->
@@ -27,11 +27,10 @@
             <h1>Manage Elections</h1>
             <p class="subtitle">Create a new election or select an existing one to manage.</p>
             <div class="hero-buttons">
-                <a href="createElection.php" class="btn-primary-custom">Create Election</a>
-                <a href="manageElection.php" class="btn-secondary-custom">Manage Elections</a>
+                <a href="../../auth/admin.php" class="btn-secondary-custom">Manage Elections</a>
             </div>
     </section>
-        <?php include '../components/footer.php'; ?>
+        <?php include '../../components/footer.php'; ?>
         
          <script src="../../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
