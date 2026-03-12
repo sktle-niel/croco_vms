@@ -12,15 +12,9 @@ if (!in_array($page, $allowed_pages)) {
 // Include session check
 require_once __DIR__ . '/../backend/include.php';
 
-// Check if admin is logged in
+// Check if admin or moderator is logged in
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header('Location: ../auth/admin.php');
-    exit;
-}
-
-// Redirect moderator to moderator dashboard
-if (isset($_SESSION['admin_user_type']) && $_SESSION['admin_user_type'] === 'moderator') {
-  header('Location: ../moderator/main.php');
+  header('Location: ../auth/admin.php');
   exit;
 }
 ?>
