@@ -2,8 +2,9 @@
 <?php
 require_once __DIR__ . '/../../backend/include.php';
 
+$stats = getDashboardStats();
+$totalVoters = $stats['totalVoters'];
 $candidates = getResultsCandidates();
-$maxVotes   = getMaxVotes($candidates);
 ?>
 
 <div class="results-page">
@@ -16,7 +17,7 @@ $maxVotes   = getMaxVotes($candidates);
         </div>
         <?php else: ?>
             <?php foreach ($candidates as $c):
-                $barPct = round(($c['vote_count'] / $maxVotes) * 100);
+$barPct = $totalVoters > 0 ? round(($c['vote_count'] / $totalVoters) * 100) : 0;
             ?>
             <div class="candidate-card">
                 <?php if (!empty($c['cand_photo'])): ?>
