@@ -233,7 +233,7 @@ function generateUniqueAdminId() {
  * @param string $password Admin password (plain text, will be hashed)
  * @return bool Returns true on success
  */
-function createStelcomAccount($email, $password) {
+function createAdminAccount($email, $password, $user_type = 'stelcom') {
     try {
         $pdo = getDBConnection();
         
@@ -243,10 +243,12 @@ function createStelcomAccount($email, $password) {
         
         $id = generateUniqueAdminId();
         
+
         $hashed = password_hash($password, PASSWORD_DEFAULT);
-        
-        $stmt = $pdo->prepare("INSERT INTO admins (id, email, password, user_type) VALUES (?, ?, ?, 'stelcom')");
-        $stmt->execute([$id, $email, $hashed]);
+        $user_type = $_POST['user_type'] ?? 'stelcom';
+        $stmt = $pdo->prepare("INSERT INTO admins (id, email, password, user_type) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$id, $email, $hashed, $user_type]);
+
         
         return true;
         
@@ -344,9 +346,10 @@ function processAccountPage() {
                     $data['message']     = 'Email already exists.';
                     $data['messageType'] = 'error';
                 } else {
-                    $result = createStelcomAccount($email, $password);
+$user_type = $_POST['user_type'] ?? 'stelcom';
+$result = createAdminAccount($email, $password, $user_type);
                     if ($result) {
-                        echo '<script>window.location.href = "' . $_SERVER['PHP_SELF'] . '?msg=created";</script>';
+echo '<script>window.location.href = "?page=account&msg=created";</script>';
                         exit;
                     } else {
                         $data['message']     = 'Error creating account.';
@@ -362,7 +365,7 @@ function processAccountPage() {
             if (!empty($id)) {
                 $result = deleteStelcomAccount($id);
                 if ($result) {
-                    echo '<script>window.location.href = "' . $_SERVER['PHP_SELF'] . '?msg=deleted";</script>';
+echo '<script>window.location.href = "?page=account&msg=deleted";</script>';
                     exit;
                 } else {
                     $data['message']     = 'Error deleting account.';
