@@ -158,10 +158,50 @@ function renderLoginSuccessOverlay() {
         }, 2000);
     }
     
-    let currentRedirectUrl = '../public/pages/vote.php';
+    let currentRedirectUrl = '';
 
     function showSuccessOverlay(title, subtitle, buttonText, redirectUrl, otp = null) {
-        currentRedirectUrl = redirectUrl || '../public/pages/vote.php';
+        document.getElementById('successTitle').textContent = title || 'Success!';
+        document.getElementById('successSubtitle').innerHTML = subtitle || 'Your action was completed successfully.';
+        
+        const btn = document.getElementById('successBtn');
+        btn.textContent = buttonText || 'OK';
+        btn.onclick = function() {
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                hideSuccessOverlay();
+            }
+        };
+        
+        // OTP handling
+        const otpContainer = document.getElementById('otpContainer');
+        if (otp) {
+            currentOTP = otp;
+            document.getElementById('otpDisplay').textContent = otp;
+            otpContainer.style.display = 'block';
+        } else {
+            otpContainer.style.display = 'none';
+        }
+        
+        // Confetti
+        const container = document.getElementById('confettiContainer');
+        container.innerHTML = '';
+        const colors = ['#222', '#444', '#666', '#888', '#aaa'];
+        for (let i = 0; i < 80; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            container.appendChild(confetti);
+        }
+        
+        document.getElementById('successOverlay').classList.add('show');
+        
+        if (redirectUrl) {
+            startCountdown(redirectUrl);
+        }
     }
 
     function proceedToLogin() {

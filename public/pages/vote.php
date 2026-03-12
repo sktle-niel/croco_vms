@@ -66,6 +66,10 @@ if (empty($displayPositions)) {
 
     <div class="container-main mt-5">
       <div class="header">
+        <div class="voter-info mb-3 p-2 border-bottom" style="border-color: #ddd; font-weight: 500; line-height: 1.4;">
+          <i class="fas fa-user me-2"></i>
+          <?php echo htmlspecialchars($_SESSION['name']); ?> (<?php echo htmlspecialchars($_SESSION['school_id']); ?>)
+        </div>
         <h1>Cast Your Vote</h1>
         <p>Select your candidates for each position</p>
 

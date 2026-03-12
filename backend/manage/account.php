@@ -18,7 +18,7 @@ function getVoters($verified = '', $voted = '', $department = '', $search = '', 
     try {
         $pdo = getDBConnection();
         
-        $sql = "SELECT id, school_id, full_name, department, is_verified, is_voted FROM users WHERE 1=1";
+$sql = "SELECT id, school_id, full_name, department, otp, is_verified, is_voted FROM users WHERE 1=1";
         $params = [];
         
         if ($verified === 'verified') {

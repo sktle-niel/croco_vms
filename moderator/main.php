@@ -3,10 +3,10 @@
 $page = $_GET['page'] ?? 'dashboard';
 
 // Define allowed pages
-$allowed_pages = ['dashboard', 'votersAccount', 'result', 'manage', 'setup', 'account'];
+$allowed_pages = ['votersAccount'];
 
 if (!in_array($page, $allowed_pages)) {
-    $page = 'dashboard';
+    $page = 'votersAccount';
 }
 
 // Include session check
