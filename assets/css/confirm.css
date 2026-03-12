@@ -1,0 +1,122 @@
+
+.confirm-modal .status-card {
+  background: #ffffff;
+  padding: 40px 35px;
+  border-radius: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-modal .status-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background: #222;
+}
+
+.confirm-modal .status-icon i {
+  font-size: 35px;
+  color: #ffffff;
+}
+
+.confirm-modal .status-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.confirm-modal .status-subtitle {
+  color: #666666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.confirm-modal .vote-details {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: left;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.confirm-modal .vote-details .vote-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.confirm-modal .vote-details .vote-item:last-child {
+  border-bottom: none;
+}
+
+.confirm-modal .vote-details .vote-position {
+  font-weight: 600;
+  color: #222;
+}
+
+.confirm-modal .vote-details .vote-candidate {
+  color: #4b5563;
+}
+
+.confirm-modal .warning-text {
+  color: #444;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.confirm-modal .status-btn {
+  background: #222;
+  color: #ffffff;
+  border: none;
+  padding: 14px 35px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 5px 20px rgba(34, 34, 34, 0.3);
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.confirm-modal .status-btn:hover {
+  background: #444;
+  transform: translateY(-2px);
+}
+
+.confirm-modal .btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 14px 35px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.confirm-modal .btn-cancel:hover {
+  background: #e5e7eb;
+}
+
