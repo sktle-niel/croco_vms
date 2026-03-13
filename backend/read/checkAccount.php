@@ -45,6 +45,15 @@ function checkAccount($schoolID, $otp) {
             ];
         }
         
+        // Check if already voted
+        if ($user['is_voted'] == 1) {
+            return [
+                'success' => false,
+                'error' => 'already_voted',
+                'message' => 'You have already cast your vote.'
+            ];
+        }
+
         // return
         return [
             'success' => true,

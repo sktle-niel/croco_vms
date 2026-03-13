@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# Clean routing for pages (stelcom/dashboard → pages/dashboard.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^dashboard/?$ main.php?page=dashboard [L,QSA]
+RewriteRule ^voters-account/?$ main.php?page=votersAccount [L,QSA]
+RewriteRule ^final-votes/?$ main.php?page=finalVotes [L,QSA]
+RewriteRule ^results/?$ main.php?page=result [L,QSA]
+RewriteRule ^votersAccount/?$ main.php?page=votersAccount [L,QSA]
+
+# Default to dashboard
+RewriteRule ^$ main.php [L,QSA]
+
+# Protect .htaccess
+<Files ".htaccess">
+    Require all denied
+</Files>
+

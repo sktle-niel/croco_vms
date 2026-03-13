@@ -4,9 +4,14 @@ require_once __DIR__ . '/../components/invalidMessage.php';
 require_once __DIR__ . '/../components/successMessage.php';
 
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
-    header('Location: ../administrator/main.php?page=dashboard');
+    if (isset($_SESSION['admin_user_type']) && $_SESSION['admin_user_type'] === 'stelcom') {
+        header('Location: ../stelcom/main.php');
+    } else {
+        header('Location: ../administrator/main.php?page=dashboard');
+    }
     exit;
 }
+
 
 $view = $_GET['view'] ?? 'login';
 
