@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <aside class="admin-sidebar">
     <div class="sidebar-header">
-        <a href="main.php?page=dashboard" class="sidebar-brand">
+        <a href="./" class="sidebar-brand">
             <img src="../../assets/img/ic2-nambertwo.png" alt="PTCI Logo" class="sidebar-logo" id="sidebarLogo">
             <div class="sidebar-brand-text">
                 <span class="brand-main">PTCI</span>
@@ -13,7 +13,7 @@
     <nav class="sidebar-nav">
         <ul class="nav-list">
             <li class="nav-item <?php echo ($page === 'votersAccount') ? 'active' : ''; ?>">
-                <a href="main.php?page=votersAccount" class="nav-link">
+<a href="./votersAccount" class="nav-link">
                     <i class="fas fa-users"></i>
                     <span>Voters Account</span>
                 </a>

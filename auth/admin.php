@@ -139,7 +139,7 @@ if ($view === 'otp' && empty($_SESSION['admin_pending_email'])) {
                     'Login Successful!',
                     'Welcome back, Admin! Redirecting to the dashboard...',
                     'Go to Dashboard',
-                    '../administrator/main.php?page=dashboard'
+                    '../administrator/'
                 ), 400);
             }
         })();
