@@ -13,25 +13,26 @@
     <nav class="sidebar-nav">
         <ul class="nav-list">
             <li class="nav-item <?php echo ($page === 'dashboard') ? 'active' : ''; ?>">
-                <a href="main.php?page=dashboard" class="nav-link">
+                <a href="dashboard" class="nav-link">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="nav-item <?php echo ($page === 'votersAccount') ? 'active' : ''; ?>">
-                <a href="main.php?page=votersAccount" class="nav-link">
+                <a href="voters-account" class="nav-link">
                     <i class="fas fa-users"></i>
                     <span>Voters Log</span>
                 </a>
             </li>
 
             <li class="nav-item <?php echo ($page === 'result') ? 'active' : ''; ?>">
-                <a href="main.php?page=result" class="nav-link">
+                <a href="results" class="nav-link">
                     <i class="fas fa-chart-bar"></i>
                     <span>Results</span>
                 </a>
             </li>
+
         </ul>
     </nav>
 
