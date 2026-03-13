@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <aside class="admin-sidebar">
     <div class="sidebar-header">
-        <a href="main.php?page=dashboard" class="sidebar-brand">
+<a href="./dashboard" class="sidebar-brand">
             <img src="../../assets/img/ic2-nambertwo.png" alt="PTCI Logo" class="sidebar-logo" id="sidebarLogo">
             <div class="sidebar-brand-text">
                 <span class="brand-main">PTCI</span>
@@ -13,37 +13,37 @@
     <nav class="sidebar-nav">
         <ul class="nav-list">
             <li class="nav-item <?php echo ($page === 'dashboard') ? 'active' : ''; ?>">
-                <a href="main.php?page=dashboard" class="nav-link">
+                <a href="./dashboard" class="nav-link">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item <?php echo ($page === 'votersAccount') ? 'active' : ''; ?>">
-                <a href="main.php?page=votersAccount" class="nav-link">
+                <a href="./votersAccount" class="nav-link">
                     <i class="fas fa-users"></i>
                     <span>Voters Account</span>
                 </a>
             </li>
             <li class="nav-item <?php echo ($page === 'result') ? 'active' : ''; ?>">
-                <a href="main.php?page=result" class="nav-link">
+                <a href="./result" class="nav-link">
                     <i class="fas fa-chart-bar"></i>
                     <span>Results</span>
                 </a>
             </li>
             <li class="nav-item <?php echo ($page === 'setup') ? 'active' : ''; ?>">
-                <a href="main.php?page=setup" class="nav-link">
+                <a href="./setup" class="nav-link">
                     <i class="fas fa-cogs"></i>
                     <span>Setup</span>
                 </a>
             </li>
             <li class="nav-item <?php echo ($page === 'manage') ? 'active' : ''; ?>">
-                <a href="main.php?page=manage" class="nav-link">
+                <a href="./manage" class="nav-link">
                     <i class="fas fa-user-tie"></i>
                     <span>Manage Candidates</span>
                 </a>
             </li>
             <li class="nav-item <?php echo ($page === 'account') ? 'active' : ''; ?>">
-                <a href="main.php?page=account" class="nav-link">
+                <a href="./account" class="nav-link">
                     <i class="fas fa-user-cog"></i>
                     <span>Account</span>
                 </a>

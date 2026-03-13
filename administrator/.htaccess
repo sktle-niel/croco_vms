@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /administrator/
+
+# Default to main.php
+RewriteRule ^$ main.php [L]
+
+# Clean URLs: /administrator/page → main.php?page=page
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ main.php?page=$1 [L,QSA]
+
+# Catch-all
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ main.php?page=$1 [L,QSA]

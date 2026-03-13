@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Rewrite /public/page → public/pages/page.php
+RewriteRule ^pages/([a-zA-Z0-9_-]+)/?$ pages/$1.php [L]
+
+# Home as default
+RewriteRule ^$ pages/home.php [L]
+
+# Catch-all for pages
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ pages/$1.php [L]

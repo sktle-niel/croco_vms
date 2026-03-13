@@ -1,6 +1,6 @@
 <?php
 // Main entry point for administrator pages
-$page = $_GET['page'] ?? 'dashboard';
+$page = $_GET['page'] ?? basename(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/administrator/') ?? 'dashboard';
 
 // Define allowed pages
 $allowed_pages = ['dashboard', 'votersAccount', 'result', 'manage', 'setup', 'account'];
