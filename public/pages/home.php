@@ -41,26 +41,17 @@
             <p>Learn about the candidates running for office</p>
         </div>
         <div class="candidates-grid">
-            <div class="candidate-preview">
-                <img src="../../img/candidatesImg/gen.jpg" alt="Generose Nastor" onerror="this.src='../../img/logo/PTCI-logo.png'">
-                <h4>Generose Nastor</h4>
-                <p>President Candidate</p>
-            </div>
-            <div class="candidate-preview">
-                <img src="../../img/candidatesImg/lennith.jpg" alt="Lennith Castro" onerror="this.src='../../img/logo/PTCI-logo.png'">
-                <h4>Lennith Castro</h4>
-                <p>Vice President Candidate</p>
-            </div>
-            <div class="candidate-preview">
-                <img src="../../img/candidatesImg/velly.jpg" alt="Velly Ibanez" onerror="this.src='../../img/logo/PTCI-logo.png'">
-                <h4>Velly Ibanez</h4>
-                <p>President Candidate</p>
-            </div>
-            <div class="candidate-preview">
-                <img src="../../img/candidatesImg/lovelie.jpeg" alt="Lovelie Reyes" onerror="this.src='../../img/logo/PTCI-logo.png'">
-                <h4>Lovelie Reyes</h4>
-                <p>Vice President Candidate</p>
-            </div>
+            <?php
+            include '../../backend/create/fetchCandidate.php';
+            $candidates = getCandidates();
+            foreach ($candidates as $candidate) {
+                echo '<div class="candidate-preview">';
+                echo '<img src="../../' . htmlspecialchars($candidate['cand_photo']) . '" alt="' . htmlspecialchars($candidate['cand_fullname']) . '" onerror="this.src=\'../../img/logo/PTCI-logo.png\'">';
+                echo '<h4>' . htmlspecialchars($candidate['cand_fullname']) . '</h4>';
+                echo '<p>' . htmlspecialchars($candidate['cand_position']) . ' Candidate</p>';
+                echo '</div>';
+            }
+            ?>
         </div>
     </section>
 
