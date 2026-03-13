@@ -70,18 +70,17 @@ $accounts = $accountData['accounts'];
     <div class="accounts-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
 
 
-        <div class="accounts-panel-header">
-            <h2>Moderator Accounts</h2>
-            <span class="accounts-count"><?php echo count($accounts); ?> total</span>
-        </div>
-        
         <!-- Moderator Accounts Section -->
         <?php 
         $moderator_accounts = $pdo->query("SELECT id, email, user_type, created_at FROM admins WHERE user_type = 'moderator' ORDER BY created_at DESC")->fetchAll(); 
         ?>
         <div class="accounts-panel-header">
-            <h2>Stelcom Accounts</h2>
+            <h2>Moderator Accounts</h2>
             <span class="accounts-count"><?php echo count($moderator_accounts); ?> total</span>
+        </div>
+        <div class="accounts-panel-header">
+            <h2>Stelcom Accounts</h2>
+            <span class="accounts-count"><?php echo count($accounts); ?> total</span>
         </div>
         
         <div class="accounts-table-container">

@@ -11,6 +11,15 @@ $totalCandidates = $stats['totalCandidates'];
 // Get candidates with votes
 $candidates = getCandidatesWithVotes();
 
+// Separate candidates by position
+$presidents = array_filter($candidates, function($c) {
+    return strtolower($c['cand_position']) === 'president';
+});
+
+$vicePresidents = array_filter($candidates, function($c) {
+    return strtolower($c['cand_position']) === 'vice president';
+});
+
 // Calculate max votes and percentage
 $maxVotes    = getMaxVotes($candidates);
 $votePercent = getVotePercent($totalVoted, $totalVoters);
@@ -19,23 +28,78 @@ $votePercent = getVotePercent($totalVoted, $totalVoters);
 
 <div class="dashboard-page">
 
+<div class="dashboard-page">
+
+    <!-- President Candidates -->
     <div class="rankings-container">
         <div class="rankings-header">
-            <h2>Candidate Rankings</h2>
-            <span><?php echo count($candidates); ?> candidates</span>
+            <h2>President Candidates</h2>
+            <span><?php echo count($presidents); ?> candidates</span>
         </div>
 
-        <?php if (empty($candidates)): ?>
+        <?php if (empty($presidents)): ?>
         <div class="empty-state">
             <i class="fas fa-user-tie"></i>
-            <p>No candidates found.</p>
+            <p>No president candidates found.</p>
         </div>
         <?php else: ?>
-            <?php foreach ($candidates as $i => $c):
+            <?php foreach ($presidents as $i => $c):
                 $rank    = $i + 1;
-
                 $barPct  = $totalVoters > 0 ? round(($c['vote_count'] / $totalVoters) * 100) : 0;
+                $medal   = $rank === 1 ? '🥇' : ($rank === 2 ? '🥈' : ($rank === 3 ? '🥉' : null));
+            ?>
+            <div class="rank-row">
+                <div class="rank-number <?php echo $medal ? '' : 'plain'; ?>">
+                    <?php echo $medal ?? '#' . $rank; ?>
+                </div>
 
+                <?php if (!empty($c['cand_photo'])): ?>
+                    <img src="../../<?php echo htmlspecialchars($c['cand_photo']); ?>"
+                         alt="<?php echo htmlspecialchars($c['cand_fullname']); ?>"
+                         class="rank-photo">
+                <?php else: ?>
+                    <div class="rank-photo-placeholder"><i class="fas fa-user"></i></div>
+                <?php endif; ?>
+
+                <div class="rank-info">
+                    <div class="rank-name"><?php echo htmlspecialchars($c['cand_fullname']); ?></div>
+                    <div class="rank-meta">
+                        <?php echo htmlspecialchars($c['cand_position']); ?>
+                        <?php if (!empty($c['cand_partylist'])): ?>
+                            &nbsp;·&nbsp;<?php echo htmlspecialchars($c['cand_partylist']); ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="rank-bar-wrap">
+                    <div class="rank-bar-fill" style="width: <?php echo $barPct; ?>%;"></div>
+                </div>
+
+                <div class="rank-votes">
+                    <?php echo number_format($c['vote_count']); ?>
+                    <small>votes</small>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
+    <!-- Vice President Candidates -->
+    <div class="rankings-container">
+        <div class="rankings-header">
+            <h2>Vice President Candidates</h2>
+            <span><?php echo count($vicePresidents); ?> candidates</span>
+        </div>
+
+        <?php if (empty($vicePresidents)): ?>
+        <div class="empty-state">
+            <i class="fas fa-user-tie"></i>
+            <p>No vice president candidates found.</p>
+        </div>
+        <?php else: ?>
+            <?php foreach ($vicePresidents as $i => $c):
+                $rank    = $i + 1;
+                $barPct  = $totalVoters > 0 ? round(($c['vote_count'] / $totalVoters) * 100) : 0;
                 $medal   = $rank === 1 ? '🥇' : ($rank === 2 ? '🥈' : ($rank === 3 ? '🥉' : null));
             ?>
             <div class="rank-row">
