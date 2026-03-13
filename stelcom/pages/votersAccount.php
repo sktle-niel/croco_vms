@@ -24,7 +24,13 @@ $totalPages = ceil($totalUsers / $limit);
 $users = getVoters($verifiedFilter, $votedFilter, $departmentFilter, $searchFilter, $limit, $offset);
 
 // Get all departments for filter dropdown
-$departments = getUserDepartments();
+$departments = [];
+try {
+    $pdo = getDBConnection();
+    $departments = $pdo->query("SELECT `dept_name` FROM `department` ORDER BY `dept_name`")->fetchAll(PDO::FETCH_COLUMN);
+} catch (PDOException $e) {
+    error_log("Error fetching departments: " . $e->getMessage());
+}
 ?>
 
 <div class="voters-page">
