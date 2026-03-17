@@ -16,6 +16,19 @@
 </head>
 
 <body class="form-body">
+<?php
+require_once '../../backend/include.php';
+
+// Fetch departments from database
+$departments = [];
+try {
+    $pdo = getDBConnection();
+    $stmt = $pdo->query("SELECT `dept_id`, `dept_name` FROM `department` WHERE 1");
+    $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    error_log("Error fetching departments: " . $e->getMessage());
+}
+?>
 
     <!-- Navigation -->
     <?php include '../../components/navigationbar.php'; ?>
@@ -59,12 +72,9 @@
                     <label for="department">Department</label>
                     <select class="form-control" id="department" name="Department" required>
                         <option value="">Select Department</option>
-                        <option value="Senior Highschool">Senior Highschool</option>
-                        <option value="Associate in Computer Technology">Associate in Computer Technology</option>
-                        <option value="Bachelor of Science in Hospitality Management">Bachelor of Science in Hospitality Management</option>
-                        <option value="Bachelor of Science in Information Communication Technology">Bachelor of Science in Information Communication Technology</option>
-                        <option value="Bachelor of Science in Information Systems">Bachelor of Science in Information Systems</option>
-                        <option value="Bachelor of Science in Office Administration">Bachelor of Science in Office Administration</option>
+                        <?php foreach ($departments as $dept): ?>
+                            <option value="<?php echo htmlspecialchars($dept['dept_name']); ?>"><?php echo htmlspecialchars($dept['dept_name']); ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 

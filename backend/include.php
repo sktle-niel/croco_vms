@@ -24,6 +24,6 @@ require_once __DIR__ . '/manage/account.php';
 
 // Include TOTP and Mailer
 require_once __DIR__ . '/config/mailer.php';
-require_once __DIR__ . '/otp/adminOTP.php';
+require_once __DIR__ . '/otp/adminOtp.php';
 
 ?>
