@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <!-- Voters Account Page -->
 <?php
 require_once __DIR__ . '/../../backend/include.php';
@@ -37,6 +38,30 @@ $totalPages = ceil($totalUsers / $limit);
 
 // Get voters with filters and pagination
 $users = getVoters($verifiedFilter, $votedFilter, $departmentFilter, $searchFilter, $limit, $offset);
+
+// Custom vote fetching (getUserVotes not auto-loaded)
+$activeBatch = 1; // Default to batch 1 as per your query; change if needed
+foreach ($users as &$u) {
+    $u['votes'] = [];
+    $u['vote_count'] = 0;
+    if (isset($u['is_voted']) && $u['is_voted']) {
+        try {
+            $pdo = getDBConnection();
+            $stmt = $pdo->prepare("
+                SELECT v.*, c.cand_fullname, c.cand_position, c.cand_partylist 
+                FROM votes v 
+                LEFT JOIN candidate c ON v.cand_id = c.cand_id 
+                WHERE v.user_id = ? AND v.election_batch = ?
+                ORDER BY v.position
+            ");
+            $stmt->execute([$u['id'], $activeBatch]);
+            $u['votes'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $u['vote_count'] = count($u['votes']);
+        } catch (PDOException $e) {
+            error_log("Error fetching votes for user " . $u['id'] . ": " . $e->getMessage());
+        }
+    }
+}
 
 // Get all departments for filter dropdown
 $departments = [];
@@ -112,13 +137,14 @@ try {
                     <th>Department</th>
                     <th>Verified</th>
                     <th>Voted</th>
+                    <th>Cast Votes</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($users)): ?>
                 <tr>
-                    <td colspan="6" style="text-align:center;">No voters found.</td>
+                    <td colspan="7" style="text-align:center;">No voters found.</td>
                 </tr>
                 <?php else: ?>
                     <?php foreach ($users as $u): ?>
@@ -137,6 +163,16 @@ try {
                             </span>
                         </td>
                         <td>
+                            <?php if ($u['vote_count'] > 0): ?>
+                            <button class="btn-action btn-edit vote-toggle" data-user-id="<?php echo $u['id']; ?>" title="View cast votes" style="display: flex; align-items: center; gap: 4px;">
+                                <span class="vote-count"><?php echo $u['vote_count']; ?> vote<?php echo $u['vote_count'] > 1 ? 's' : ''; ?></span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <?php else: ?>
+                            <span class="status-badge inactive">No votes</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
                             <form method="POST" style="display:inline;">
                                 <input type="hidden" name="action" value="verify_user">
                                 <input type="hidden" name="user_id" value="<?php echo $u['id']; ?>">
@@ -147,6 +183,26 @@ try {
                             </form>
                         </td>
                     </tr>
+                    <?php if ($u['vote_count'] > 0): ?>
+                    <tr class="vote-details" data-user-id="<?php echo $u['id']; ?>" style="display: none; background: rgba(0,0,0,0.02);">
+                        <td colspan="7">
+                            <div class="vote-list">
+                                <h4 style="margin: 0 0 10px 0; color: var(--text-primary);">Cast Votes (Batch <?php echo $activeBatch; ?>):</h4>
+                                <?php foreach ($u['votes'] as $vote): ?>
+                                <div class="vote-item" style="margin-bottom: 8px; padding: 8px; background: var(--bg-card); border-radius: var(--radius); border-left: 3px solid var(--primary); font-size: 13px;">
+                                    <strong><?php echo htmlspecialchars($vote['position'] ?? $vote['cand_position'] ?? 'Unknown Position'); ?>:</strong> 
+                                    <?php echo htmlspecialchars($vote['cand_fullname'] ?? 'ID: ' . $vote['cand_id']); ?>
+                                    <?php if ($vote['cand_partylist']): ?><small> (<?php echo htmlspecialchars($vote['cand_partylist']); ?>)</small><?php endif; ?>
+                                    <span style="float: right; font-size: 11px; color: var(--text-muted);">
+                                        Vote ID: <?php echo htmlspecialchars($vote['vote_id']); ?> | 
+                                        <?php echo $vote['voted_at'] ? date('M j, Y g:i A', strtotime($vote['voted_at'])) : 'N/A'; ?>
+                                    </span>
+                                </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </tbody>
@@ -182,8 +238,7 @@ try {
                 $startPage = max(1, $page - 2);
                 $endPage = min($totalPages, $page + 2);
                 
-                for ($i = $startPage; $i <= $endPage; $i++): 
-                ?>
+                for ($i = $startPage; $i <= $endPage; $i++): ?>
                 <a href="<?php echo $baseUrl; ?>page_num=<?php echo $i; ?>" 
                    class="btn-action <?php echo $i === $page ? 'btn-edit' : ''; ?>"
                    style="min-width: 32px; text-decoration: none; <?php echo $i === $page ? 'background: var(--text-primary); color: var(--bg-card);' : ''; ?>">
@@ -202,3 +257,20 @@ try {
     </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.vote-toggle').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const userId = this.dataset.userId;
+            const detailsRow = document.querySelector('.vote-details[data-user-id="' + userId + '"]');
+            if (detailsRow) {
+                detailsRow.style.display = detailsRow.style.display === 'none' ? 'table-row' : 'none';
+                const icon = this.querySelector('i');
+                icon.classList.toggle('fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            }
+        });
+    });
+});
+</script>
